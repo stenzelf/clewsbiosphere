@@ -1,15 +1,15 @@
-Package: clews_biosphere
+Package: clewsbiosphere
 Type: Package
 Title: Functions for the CLEWS - Intro to the terrestrial biosphere - Exercise
 Version: 1.0.0
 Author: Fabian Stenzel
 Maintainer: Fabian Stenzel <stenzel@pik-potsdam.de>
 Description: Functions to read and plot netcdf climate data, and compare NPP 
-    between the Miami model and measurements by Zhang et al. 2018
+  between the Miami model and measurements by Zhang et al. 2018.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
 Depends:
-    RColorBrewer,
-    ncdf4
+  RColorBrewer,
+  ncdf4
