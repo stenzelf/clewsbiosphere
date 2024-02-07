@@ -1,23 +1,17 @@
 ## Installation
 
-You can install `clewsbiosphere` by git cloning this repository:
-
-```bash
-git clone https://gitlab.pik-potsdam.de/stenzel/clewsbiosphere.git <path_to_clews_biosphere>
-```
-(replace <path_to_clews_biosphere> with the location you want to save it to)
-
-and install via  [`devtools`](https://rawgit.com/rstudio/cheatsheets/master/package-development.pdf):
+First install the [`devtools`](https://rawgit.com/rstudio/cheatsheets/master/package-development.pdf) package and load it:
 
 ```R
-devtools::install("<path_to_clews_biosphere>")
-library("clewsbiosphere")
+install.packages("devtools")
+library(devtools)
 ```
 
-alternatively, you can also load it from source without installing it:
+Then, you can install `clewsbiosphere` by directly loading it from the PIK gitlab server:
 
 ```R
-devtools::load_all("<path_to_clews_biosphere>")
+devtools::install_git("git@gitlab.pik-potsdam.de:stenzel/clews_biosphere.git")
+library(clewsbiosphere)
 ```
 
 ## Examples
