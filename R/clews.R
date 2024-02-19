@@ -319,13 +319,18 @@ read_in_zhang_file <- function(csv_in_file){
 #'
 #' @export
 add_modelled_npp_to_zhang_npp_measurements <- function(zhang_data, modelled_npp) {
-  min_model_year <- min(as.integer(dimnames(modelled_npp)$year))
+  npp_years <- as.integer(dimnames(modelled_npp)$year)
+  npp_years_length <- length(npp_years)
+  min_model_year <- min(npp_years)
+
   years <- unique(zhang_data$year)
   #      Average,1991,1959-98,1988-90,Potential,1993,1986-93,1982-89,1983-90,1992,1982-96,1988,latest interval,1990-93,1987-97
-  from <- c(  51,  91,     59,     88,       NA,  93,     86,     82,     83,  92,     82, 88,              NA,     90,     87) - (2000-min_model_year)
-  to <-   c( 122,  91,     98,     90,       NA,  93,     93,     89,     90,  92,     96, 88,              NA,     93,     97) - (2000-min_model_year)
+  from <- c(  51,  91,     59,     88,       NA,  93,     86,     82,     83,  92,     82, 88,              NA,     90,     87) - (min_model_year-1900)
+  to <-   c( 122,  91,     98,     90,       NA,  93,     93,     89,     90,  92,     96, 88,              NA,     93,     97) - (min_model_year-1900)
   from[from<1] <- 1
+  from[from>npp_years_length] <- npp_years_length
   to[to<1] <- 1
+  to[to>npp_years_length] <- npp_years_length
   npp_measured <- zhang_data$totnpp
   npp_modelled <- array(NA,dim=length(npp_measured))
   for (i in 1:length(npp_measured)){
