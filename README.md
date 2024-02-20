@@ -7,10 +7,10 @@ install.packages("devtools")
 library(devtools)
 ```
 
-Then, you can install `clewsbiosphere` by directly loading it from the PIK gitlab server:
+Then, you can install `clewsbiosphere` by directly loading it from github:
 
 ```R
-devtools::install_git("git@gitlab.pik-potsdam.de:stenzel/clews_biosphere.git")
+devtools::install_git("git@github.com:stenzelf/clewsbiosphere.git")
 library(clewsbiosphere)
 ```
 
