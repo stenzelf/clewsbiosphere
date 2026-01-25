@@ -195,6 +195,8 @@ read_netcdf <- function(nc_in_file,
 #' @param file character path. file location to save the plot to. 
 #'        If not supplied prints to screen. Default: NULL
 #' @param title character string printed as title.
+#' @param palette color palette to be used (default: map.pal("viridis",100))
+#' @param range data range for which to limit the legend (default: range(data))
 #'
 #' @return None
 #'
@@ -203,16 +205,19 @@ read_netcdf <- function(nc_in_file,
 #' }
 #'
 #' @export
-plot_lon_lat_array <- function(data, file = NULL, title = ""){
+plot_lon_lat_array <- function(data, 
+                               file = NULL, 
+                               title = "", 
+                               palette = map.pal("viridis",100), 
+                               range = range(data)){
   di <- dim(data)
   if (length(di)>2) stop("Too many dimensions on data object, 
                          please reduce by picking/summing/averaging.")
   par(mar=c(3,3,0,0)) #bltr
   ra <- terra::rast(t(data[,di[2]:1]))
-  range <- range(data)
   extent <- terra::ext(c(0, di[1], 30, di[2]))
   if (!is.null(file)) png(file, width=7.25, height=3.5, units="in", res=300, pointsize=6,type="cairo")
-  terra::plot(ra, main = title,ext = extent)
+  terra::plot(ra, main = title, ext = extent, col = palette, range = range)
   if (!is.null(file)) dev.off()
 }
 
@@ -378,7 +383,10 @@ scatter_plot <- function(x, y, file = NULL, title = "", xlab = "", ylab = ""){
   plot(x = x, y = y, ylim = c(0,max), xlim = c(0,max), xlab = xlab, 
        ylab = ylab, asp=1, main = title)
   abline(a = 0,b = 1)
-  fit <- summary(lm(x~y))
+  subs <- which(is.finite(x) & is.finite(y))
+  x_subs <- x[subs]
+  y_subs <- y[subs]
+  fit <- summary(lm(x_subs~y_subs))
   text(x = 0, y = max*0.9,paste("R^2 =",round(fit$r.squared,4)),adj=c(0,1))
   if (!is.null(file)) dev.off()
 }
