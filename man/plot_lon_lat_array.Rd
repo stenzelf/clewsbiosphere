@@ -4,7 +4,13 @@
 \alias{plot_lon_lat_array}
 \title{Plot an array of lon_lat data to screen or file}
 \usage{
-plot_lon_lat_array(data, file = NULL, title = "")
+plot_lon_lat_array(
+  data,
+  file = NULL,
+  title = "",
+  palette = map.pal("viridis", 100),
+  range = range(data)
+)
 }
 \arguments{
 \item{data}{array to plot. Needs to be in format [longitude,latitude].}
@@ -13,6 +19,10 @@ plot_lon_lat_array(data, file = NULL, title = "")
 If not supplied prints to screen. Default: NULL}
 
 \item{title}{character string printed as title.}
+
+\item{palette}{color palette to be used (default: map.pal("viridis",100))}
+
+\item{range}{data range for which to limit the legend (default: range(data))}
 }
 \value{
 None
